@@ -1,0 +1,6 @@
+@TroyWebConsultingApplication_HostAddress = http://localhost:5083
+
+GET {{TroyWebConsultingApplication_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
