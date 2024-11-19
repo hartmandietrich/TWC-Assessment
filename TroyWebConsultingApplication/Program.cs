@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TroyWebConsultingApplication;
 using TroyWebConsultingApplication.Entities;
+using TroyWebConsultingApplication.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,7 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
         }
     } );
 });
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
