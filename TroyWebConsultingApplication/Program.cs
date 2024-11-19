@@ -2,8 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using TroyWebConsultingApplication;
 using TroyWebConsultingApplication.Entities;
 using TroyWebConsultingApplication.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("LibraryDbContextConnection") ?? throw new InvalidOperationException("Connection string 'LibraryDbContextConnection' not found.");
 
 // Add services to the container.
 
@@ -59,6 +61,8 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
         }
     } );
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<LibraryDbContext>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
