@@ -19,15 +19,36 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
     {
         Book[] initialBooks = [new Book
             {
-                Title = "The Shining"
+                Title = "The Shining",
+                Author = "Stephen King",
+                Description = "Scary book oooooh",
+                Publisher = "I dunno",
+                PublicationDate = DateOnly.FromDateTime(DateTime.Now),
+                Category = "Horror",
+                PageCount = 666,
+                IsCheckedOut = false
             },
             new Book
             {
-                Title = "Jaws"
+                Title = "Jaws",
+                Author = "The Author of Jaws",
+                Description = "Ooooooh he'll bite ya",
+                Publisher = "Someone probably",
+                PublicationDate = DateOnly.FromDateTime(DateTime.Now),
+                Category = "Horror",
+                PageCount = 400,
+                IsCheckedOut = false
             },
             new Book
             {
-                Title = "Wild Seed"
+                Title = "Wild Seed",
+                Author = "Octavia Butler",
+                Description = "Immortal lady, real cool",
+                Publisher = "This book was in fact published",
+                PublicationDate = DateOnly.FromDateTime(DateTime.Now),
+                Category = "Science Fiction",
+                PageCount = 300,
+                IsCheckedOut = false
             }
         ];
     
