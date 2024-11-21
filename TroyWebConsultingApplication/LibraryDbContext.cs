@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TroyWebConsultingApplication.DataSeeding;
 using TroyWebConsultingApplication.Entities;
 
 namespace TroyWebConsultingApplication;
@@ -16,20 +17,8 @@ public class LibraryDbContext(DbContextOptions<LibraryDbContext> options) : Iden
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Book>().HasData(
-            new Book {
-                Id = 1,
-                Title = "The Shining",
-                Author = "Stephen King",
-                Description = "Scary book oooooh",
-                Publisher = "I dunno",
-                PublicationDate = DateOnly.FromDateTime(DateTime.Now),
-                Category = "Horror",
-                PageCount = 666,
-                IsCheckedOut = false
-            }
-        );
         base.OnModelCreating(modelBuilder);
+        new DbInitializer(modelBuilder).Seed();
     }
 }
 
