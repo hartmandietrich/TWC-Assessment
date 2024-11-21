@@ -10,9 +10,13 @@ namespace TroyWebConsultingApplication.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AuthorizationController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+public class AuthorizationController(
+    UserManager<IdentityUser> userManager,
+    RoleManager<IdentityRole> roleManager,
+    SignInManager<IdentityUser> signInManager
+    )
 {
-    [HttpPost(Name = "RegisterUser")]
+    [HttpPost("user/register", Name = "RegisterUser")]
     public async Task RegisterUser(RegisterUserRequest request)
     {
         var identityUser = new IdentityUser(request.Username);
@@ -23,5 +27,17 @@ public class AuthorizationController(UserManager<IdentityUser> userManager, Role
         {
             await userManager.AddToRoleAsync(identityUser, request.RoleName);
         }
+    }
+    
+    [HttpPost("user/login", Name = "Login")]
+    public async Task Login(string username, string password)
+    {
+        await signInManager.PasswordSignInAsync(username, password, false, false);
+    }
+
+    [HttpPost("user/logout", Name = "Logout")]
+    public async Task Logout()
+    {
+        await signInManager.SignOutAsync();
     }
 }
