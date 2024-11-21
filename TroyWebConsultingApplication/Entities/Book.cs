@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace TroyWebConsultingApplication.Entities;
 
 public class Book
@@ -11,7 +13,7 @@ public class Book
     public required string Category { get; set; }
     public required int PageCount { get; set; }
     public required bool IsCheckedOut { get; set; }
-    public string? CheckedOutBy { get; set; }
+    public IdentityUser? CheckedOutBy { get; set; }
     public DateTime? LastCheckedOut { get; set; }
     public byte[]? CoverImage { get; set; }
 }

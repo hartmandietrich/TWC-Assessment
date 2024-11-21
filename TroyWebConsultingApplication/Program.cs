@@ -27,6 +27,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddRoleManager<RoleManager<IdentityRole>>()
     .AddUserManager<UserManager<IdentityUser>>()
     .AddDefaultUI()
+    .AddSignInManager<SignInManager<IdentityUser>>()
     .AddEntityFrameworkStores<LibraryDbContext>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddAuthorization();
@@ -39,8 +40,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.MapIdentityApi<IdentityUser>();
 
 using (var scope = app.Services.CreateScope())
 {

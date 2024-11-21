@@ -7,6 +7,8 @@ namespace TroyWebConsultingApplication.Repositories;
 public interface IBookRepository
 {
     public IQueryable<Book> GetBooks();
+    
+    public Book GetBookById(int id);
     public IEnumerable<Book> GetBooksByTitle(string title);
     public Book AddBook(Book book);
     public Book UpdateBook(Book book);
@@ -18,6 +20,16 @@ public class BookRepository(LibraryDbContext context) : IBookRepository
     public IQueryable<Book> GetBooks()
     {
         return context.Set<Book>();
+    }
+
+    public Book GetBookById(int id)
+    {
+        var book = context.Set<Book>().Find(id);
+        if (book == null)
+        {
+            throw new KeyNotFoundException();
+        }
+        return book;
     }
 
     public IEnumerable<Book> GetBooksByTitle(string title)
@@ -45,12 +57,5 @@ public class BookRepository(LibraryDbContext context) : IBookRepository
         context.SaveChanges();
         return deletedBook;
     }
-
-    // public IQueryable<Book> FilterBooks(BookFilterRequest filterRequest)
-    // {
-    //     return context.Set<Book>().Where((book) => (filterRequest.Title.IsNullOrEmpty() ? true : book.Title.Contains(filterRequest.Title)) &&
-    //                                                (filterRequest.Author.IsNullOrEmpty() ? true : book.Author.Contains(filterRequest.Author)) &&
-    //                                                (filterRequest.IsAvailable.IsNullOrEmpty() || !book.IsCheckedOut.Equals(filterRequest.IsAvailable)));
-    // }
     
 }
