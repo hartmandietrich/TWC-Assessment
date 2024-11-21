@@ -19,12 +19,14 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
         "data source=DESKTOP-S6KJK1Q\\SQLEXPRESS;initial catalog=master;trusted_connection=true;TrustServerCertificate=True");
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
     })
     .AddRoles<IdentityRole>()
     .AddRoleManager<RoleManager<IdentityRole>>()
+    .AddUserManager<UserManager<IdentityUser>>()
+    .AddDefaultUI()
     .AddEntityFrameworkStores<LibraryDbContext>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddAuthorization();

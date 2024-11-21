@@ -1,7 +1,5 @@
-using Microsoft.AspNet.Identity;
 using Microsoft.EntityFrameworkCore;
 using TroyWebConsultingApplication.Entities;
-using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
 
 namespace TroyWebConsultingApplication.DataSeeding;
 
