@@ -11,9 +11,9 @@
     </v-col>
     <v-col cols="12">
       All Books
-      <v-text-field label="Search" variant="outlined"></v-text-field>
+      <v-text-field v-model="search" label="Search" variant="outlined"></v-text-field>
     </v-col>
-    <v-col cols="12" v-for="(book, id) in books">
+    <v-col cols="12" v-for="(book, id) in searchedBooks">
       <BookInfo :book="book"></BookInfo>
     </v-col>
   </v-row>
@@ -29,6 +29,7 @@ const store = useStore();
 const numFeatured = 4;
 
 const books = ref([]);
+const search = ref("");
 
 onMounted(async () => {
   await store.dispatch("books/getBooks");
@@ -47,5 +48,9 @@ const featuredBooks = computed(() => {
     }
   }
   return featuredBooksArray;
+})
+
+const searchedBooks = computed(() => {
+  return books.value.filter(book => book.title.toLowerCase().includes(search.value.toLowerCase()));
 })
 </script>
