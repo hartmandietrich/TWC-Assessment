@@ -9,10 +9,10 @@
     <v-col cols="12" align-self="center">
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="login">
-          <LoginForm />
+          <LoginForm @login="routeToFeatured"/>
         </v-tabs-window-item>
         <v-tabs-window-item value="register">
-          <RegisterForm />
+          <RegisterForm @register="tab = 'login'"/>
         </v-tabs-window-item>
       </v-tabs-window>
     </v-col>
@@ -20,9 +20,15 @@
 </template>
 
 <script setup>
-import LoginForm from "@/components/Forms/LoginForm.vue";
 import {ref} from "vue";
+import {useRouter} from "vue-router";
+import LoginForm from "@/components/Forms/LoginForm.vue";
 import RegisterForm from "@/components/Forms/RegisterForm.vue";
 
 const tab = ref();
+const router = useRouter();
+
+const routeToFeatured = () => {
+  router.push("/featured");
+}
 </script>

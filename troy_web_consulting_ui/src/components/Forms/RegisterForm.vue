@@ -14,6 +14,7 @@
 <script setup>
 import {ref} from "vue";
 import { useStore } from "vuex";
+import { defineEmits } from "vue"
 
 const store = useStore();
 
@@ -21,6 +22,7 @@ const valid = ref(false);
 const username = ref();
 const password = ref();
 const role = ref();
+const emit = defineEmits(["register"])
 
 const roles = ["Customer", "Librarian"]
 const usernameRules = [value => {
@@ -36,12 +38,14 @@ const roleRules = [value => {
   return 'Must chose a role.'
 }]
 
-const registerUser = () => {
+const registerUser = async () => {
   const registerInfo = {
     username: username.value,
     password: password.value,
     rolename: role.value
   }
-  store.dispatch("authentication/registerUser", registerInfo)
+  await store.dispatch("authentication/registerUser", registerInfo);
+
+  emit("register");
 }
 </script>

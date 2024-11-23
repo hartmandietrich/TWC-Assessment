@@ -13,8 +13,10 @@
 <script setup>
 import {ref} from "vue";
 import { useStore } from "vuex";
+import { defineEmits } from "vue";
 
 const store = useStore();
+const emit = defineEmits(["login"]);
 
 const valid = ref(false);
 const username = ref();
@@ -29,11 +31,13 @@ const passwordRules = [value => {
   return 'Password is required.'
 }]
 
-const login = () => {
+const login = async () => {
   const loginInfo = {
     username: username.value,
     password: password.value,
   }
-  store.dispatch('authentication/login', loginInfo);
+  await store.dispatch('authentication/login', loginInfo);
+
+  emit("login");
 }
 </script>
