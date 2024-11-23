@@ -6,13 +6,16 @@
       <v-select v-model="role" label="Role" :items="roles" :rules="roleRules" required></v-select>
     </v-form>
     <v-card-actions>
-      <v-btn :disabled="!valid">Register</v-btn>
+      <v-btn :disabled="!valid" @click="registerUser">Register</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup>
 import {ref} from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const valid = ref(false);
 const username = ref();
@@ -32,4 +35,13 @@ const roleRules = [value => {
   if (value) return true
   return 'Must chose a role.'
 }]
+
+const registerUser = () => {
+  const registerInfo = {
+    username: username.value,
+    password: password.value,
+    rolename: role.value
+  }
+  store.dispatch("authentication/registerUser", registerInfo)
+}
 </script>
