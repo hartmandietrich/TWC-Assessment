@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="12">
-      <v-tabs v-model="tab">
+      <v-tabs v-model="tab" color="primary">
         <v-tab value="login">Log In</v-tab>
         <v-tab value="register">Register</v-tab>
       </v-tabs>

@@ -6,7 +6,7 @@
       <v-select v-model="role" label="Role" :items="roles" :rules="roleRules" required></v-select>
     </v-form>
     <v-card-actions>
-      <v-btn :disabled="!valid" @click="registerUser">Register</v-btn>
+      <v-btn :disabled="!valid" class="text-white" color = "primary" variant="flat" @click="registerUser">Register</v-btn>
     </v-card-actions>
   </v-card>
 </template>

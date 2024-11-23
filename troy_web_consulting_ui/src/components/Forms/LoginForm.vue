@@ -5,7 +5,7 @@
       <v-text-field v-model="password" label="Password" :rules="passwordRules" required></v-text-field>
     </v-form>
     <v-card-actions>
-      <v-btn :disabled="!valid" @click="login">Login</v-btn>
+      <v-btn :disabled="!valid" class="text-white" color = "primary" variant="flat" @click="login">Login</v-btn>
     </v-card-actions>
   </v-card>
 </template>
