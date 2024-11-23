@@ -5,6 +5,10 @@ const state = () => ({
     searchedBooks: []
 })
 
+const getters = {
+    allBooks: state => state.books,
+}
+
 const actions = {
     async getBooks({state}) {
         return axios.get('https://localhost:44346/api/Book/getall')
@@ -37,5 +41,6 @@ const actions = {
 export default {
     namespaced: true,
     state,
+    getters,
     actions
 }
