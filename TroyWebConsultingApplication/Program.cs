@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+var  AllowOrigins = "_AllowOrigins";
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -17,6 +19,16 @@ builder.Services.AddDbContext<LibraryDbContext>(options =>
 {
     options.UseSqlServer(
         "data source=DESKTOP-S6KJK1Q\\SQLEXPRESS;initial catalog=master;trusted_connection=true;TrustServerCertificate=True");
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:5173");
+            policy.AllowAnyHeader();
+        });
 });
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -62,5 +74,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(AllowOrigins);
 
 app.Run();

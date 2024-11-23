@@ -12,7 +12,7 @@
           <LoginForm />
         </v-tabs-window-item>
         <v-tabs-window-item value="register">
-          <LoginForm />
+          <RegisterForm />
         </v-tabs-window-item>
       </v-tabs-window>
     </v-col>
@@ -22,6 +22,7 @@
 <script setup>
 import LoginForm from "@/components/Forms/LoginForm.vue";
 import {ref} from "vue";
+import RegisterForm from "@/components/Forms/RegisterForm.vue";
 
-var tab = ref();
+const tab = ref();
 </script>
