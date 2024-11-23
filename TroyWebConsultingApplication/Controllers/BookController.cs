@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TroyWebConsultingApplication.Entities;
@@ -15,6 +16,7 @@ public class BookController(
     ) : ControllerBase
 {
     [HttpGet("getall",Name = "GetBooks")]
+    [Authorize]
     public IEnumerable<Book> Get()
     {
         return repository.GetBooks();

@@ -26,8 +26,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: AllowOrigins,
         policy  =>
         {
-            policy.WithOrigins("http://localhost:5173");
-            policy.AllowAnyHeader();
+            policy.SetIsOriginAllowed((host) => true)
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .AllowAnyHeader();
         });
 });
 
@@ -42,6 +44,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddSignInManager<SignInManager<IdentityUser>>()
     .AddEntityFrameworkStores<LibraryDbContext>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -69,12 +72,15 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseCors(AllowOrigins);
+
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseCors(AllowOrigins);
 
 app.Run();
