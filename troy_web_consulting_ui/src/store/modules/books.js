@@ -6,17 +6,10 @@ const state = () => ({
 })
 
 const actions = {
-    async getBooks() {
+    async getBooks({state}) {
         return axios.get('https://localhost:44346/api/Book/getall')
             .then((response) => {
                 state.books = response.data;
-            })
-    },
-
-    async getBooksByTitle({}, title) {
-        return axios.get('https://localhost:44346/api/Book/getByTitle', {params: {title}})
-            .then((response) => {
-                state.searchedBooks = response.data;
             })
     },
 
@@ -42,6 +35,7 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
     actions
 }
