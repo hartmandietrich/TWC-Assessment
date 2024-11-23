@@ -30,9 +30,9 @@ public class AuthorizationController(
     }
     
     [HttpPost("user/login", Name = "Login")]
-    public async Task Login(string username, string password)
+    public async Task Login(ApplicationLoginRequest request)
     {
-        await signInManager.PasswordSignInAsync(username, password, false, false);
+        await signInManager.PasswordSignInAsync(request.Username, request.Password, false, false);
     }
 
     [HttpPost("user/logout", Name = "Logout")]
