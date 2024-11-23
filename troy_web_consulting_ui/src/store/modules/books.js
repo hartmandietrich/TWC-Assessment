@@ -11,7 +11,7 @@ const getters = {
 
 const actions = {
     async getBooks({state}) {
-        return axios.get('https://localhost:44346/api/Book/getall')
+        return axios.get('https://localhost:44346/api/Book/getall', {withCredentials: true})
             .then((response) => {
                 state.books = response.data;
             })
@@ -30,7 +30,7 @@ const actions = {
     },
 
     async checkoutBook({}, book) {
-        return axios.post('https://localhost:44346/api/Book/checkout', book)
+        return axios.post('https://localhost:44346/api/Book/checkout', book, {withCredentials: true})
     },
 
     async makeBookAvailable({}, book) {

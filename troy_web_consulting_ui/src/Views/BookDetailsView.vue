@@ -9,6 +9,17 @@
       <div>Category: {{detailBook?.category}}</div>
       <div>Page Count: {{detailBook?.pageCount}}</div>
     </div>
+    <v-card-actions>
+      <v-btn class="text-white"
+             color="primary"
+             variant="flat"
+             @click="checkoutBook">Checkout
+      </v-btn>
+      <v-btn class="text-white"
+             color="primary"
+             variant="flat">Edit
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </v-container>
 </template>
@@ -34,6 +45,10 @@ const detailBook = computed(() => {
   }
   return allBooks.value[index];
 })
+
+const checkoutBook = () => {
+  store.dispatch('books/checkoutBook', detailBook.value);
+}
 </script>
 
 <style scoped>
