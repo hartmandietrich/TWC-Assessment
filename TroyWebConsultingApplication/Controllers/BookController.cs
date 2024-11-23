@@ -23,6 +23,7 @@ public class BookController(
     }
 
     [HttpGet("getByTitle/{title}", Name = "GetBooksByTitle")]
+    [Authorize]
     public IEnumerable<Book> GetBooksByTitle(string title)
     {
         return repository.GetBooksByTitle(title);
