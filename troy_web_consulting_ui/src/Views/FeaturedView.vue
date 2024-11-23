@@ -5,9 +5,7 @@
       Featured Books
     </v-col>
     <v-col :cols="books.length/numFeatured" v-for="(book, id) in featuredBooks">
-      <v-card>
-        {{ book.title }}
-      </v-card>
+      <FeaturedBookInfo :book="book" />
     </v-col>
     <v-col cols="12">
       All Books
@@ -24,6 +22,7 @@
 import {computed, onMounted, ref} from "vue";
 import {useStore} from "vuex";
 import BookInfo from "@/components/Books/BookInfo.vue";
+import FeaturedBookInfo from "@/components/Books/FeaturedBookInfo.vue";
 
 const store = useStore();
 const numFeatured = 4;
