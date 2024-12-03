@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import {defineProps, defineEmits, onMounted, reactive, ref, watch} from "vue";
+import {defineProps, onMounted, ref,} from "vue";
 import {useStore} from "vuex";
 
 const store = useStore();

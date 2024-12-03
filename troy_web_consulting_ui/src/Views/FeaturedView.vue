@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container class="d-flex flex-column justify-end">
   <v-row>
     <v-col cols="10">
       Featured Books
@@ -18,6 +18,10 @@
       <BookInfo :book="book"></BookInfo>
     </v-col>
   </v-row>
+  <v-fab color="primary" icon class="mt-12" @click="createBookDialog = true">+</v-fab>
+  <v-dialog v-model="createBookDialog">
+    <CreateBookForm @exitcreate="createBookDialog = false"/>
+  </v-dialog>
 </v-container>
 </template>
 
@@ -28,6 +32,7 @@ import {useStore} from "vuex";
 import BookInfo from "@/components/Books/BookInfo.vue";
 import FeaturedBookInfo from "@/components/Books/FeaturedBookInfo.vue";
 import LogOutButton from "@/components/LogOutButton.vue";
+import CreateBookForm from "@/components/Forms/CreateBookForm.vue";
 
 const store = useStore();
 const router = useRouter();
@@ -35,6 +40,7 @@ const numFeatured = 4;
 
 const books = ref([]);
 const search = ref("");
+const createBookDialog = ref(false);
 
 onMounted(async () => {
   await store.dispatch("books/getBooks");

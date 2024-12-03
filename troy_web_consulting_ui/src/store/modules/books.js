@@ -22,7 +22,7 @@ const actions = {
     },
 
     async createBook({},book) {
-        return axios.post('https://localhost:44346/api/Book/create', book)
+        return axios.post('https://localhost:44346/api/Book/create', book, {withCredentials: true})
     },
 
     async deleteBook({}, book) {
@@ -39,7 +39,7 @@ const actions = {
     },
 
     async makeBookAvailable({}, book) {
-        return axios.post('https://localhost:44346/api/Book/makeavailable', book)
+        return axios.post('https://localhost:44346/api/Book/makeavailable', book, {withCredentials: true})
     }
 }
 
