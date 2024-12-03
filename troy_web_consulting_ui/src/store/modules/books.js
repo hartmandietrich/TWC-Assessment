@@ -18,7 +18,7 @@ const actions = {
     },
 
     async editBook({},book) {
-        return axios.put('https://localhost:44346/api/Book/update', book)
+        return axios.put('https://localhost:44346/api/Book/update', book, {withCredentials: true})
     },
 
     async createBook({},book) {
@@ -26,7 +26,12 @@ const actions = {
     },
 
     async deleteBook({}, book) {
-        return axios.delete('https://localhost:44346/api/Book/delete', book)
+        return axios.delete('https://localhost:44346/api/Book/delete', {
+            headers: {
+                withCredentials: true
+            },
+            data: book
+        })
     },
 
     async checkoutBook({}, book) {
