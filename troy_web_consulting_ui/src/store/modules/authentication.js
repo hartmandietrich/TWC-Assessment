@@ -2,7 +2,6 @@ import axios from "axios";
 
 const actions = {
     async login({},loginInfo) {
-        console.log(loginInfo);
         return axios.post('https://localhost:44346/Authorization/user/login', loginInfo, {withCredentials: true})
     },
 

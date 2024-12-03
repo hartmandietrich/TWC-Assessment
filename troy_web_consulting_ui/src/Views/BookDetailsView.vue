@@ -13,6 +13,7 @@
       <v-btn class="text-white"
              color="primary"
              variant="flat"
+             :disabled="isUnavailable"
              @click="checkoutBook">Checkout
       </v-btn>
       <v-btn class="text-white"
@@ -57,6 +58,13 @@ const detailBook = computed(() => {
     return null
   }
   return allBooks.value[index];
+})
+
+const isUnavailable = computed(() => {
+  if (detailBook.value) {
+    return detailBook.value.isCheckedOut
+  }
+  return true;
 })
 
 const checkoutBook = () => {
