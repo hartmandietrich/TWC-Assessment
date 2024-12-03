@@ -5,7 +5,9 @@ using TroyWebConsultingApplication.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-// var connectionString = builder.Configuration.GetConnectionString("LibraryDbContextConnection") ?? throw new InvalidOperationException("Connection string 'LibraryDbContextConnection' not found.");
+
+var connectionString =
+    "data source=DESKTOP-S6KJK1Q\\SQLEXPRESS;initial catalog=master;trusted_connection=true;TrustServerCertificate=True";
 
 // Add services to the container.
 
@@ -17,8 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<LibraryDbContext>(options =>
 {
-    options.UseSqlServer(
-        "data source=DESKTOP-S6KJK1Q\\SQLEXPRESS;initial catalog=master;trusted_connection=true;TrustServerCertificate=True");
+    options.UseSqlServer(connectionString);
 });
 
 builder.Services.AddCors(options =>

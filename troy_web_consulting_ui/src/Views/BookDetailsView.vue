@@ -17,20 +17,33 @@
       </v-btn>
       <v-btn class="text-white"
              color="primary"
-             variant="flat">Edit
+             variant="flat"
+              @click="editBookDialog=true">Edit
+      </v-btn>
+      <v-btn class="text-white"
+             color="red"
+             variant="flat"
+             @click="deleteBook">Delete
+
       </v-btn>
     </v-card-actions>
   </v-card>
+  <v-dialog v-model="editBookDialog">
+    <EditBookForm :book="detailBook" @exitedit="editBookDialog=false"/>
+  </v-dialog>
 </v-container>
 </template>
 
 <script setup>
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
-import {computed} from "vue";
+import {computed, ref} from "vue";
+import EditBookForm from "@/components/Forms/EditBookForm.vue";
 
 const route = useRoute();
 const store = useStore();
+
+const editBookDialog = ref(false);
 
 const allBooks = computed(() => {
   return store.getters['books/allBooks'];
@@ -49,8 +62,8 @@ const detailBook = computed(() => {
 const checkoutBook = () => {
   store.dispatch('books/checkoutBook', detailBook.value);
 }
+
+const deleteBook = () => {
+  store.dispatch('books/deleteBook', detailBook.value);
+}
 </script>
-
-<style scoped>
-
-</style>
