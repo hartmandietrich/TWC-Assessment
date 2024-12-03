@@ -1,8 +1,11 @@
 <template>
 <v-container>
   <v-row>
-    <v-col cols="12">
+    <v-col cols="10">
       Featured Books
+    </v-col>
+    <v-col cols="2">
+      <LogOutButton @click="routeToLogin"/>
     </v-col>
     <v-col :cols="books.length/numFeatured" v-for="(book, id) in featuredBooks">
       <FeaturedBookInfo :book="book" />
@@ -20,11 +23,14 @@
 
 <script setup>
 import {computed, onMounted, ref} from "vue";
+import {useRouter} from "vue-router";
 import {useStore} from "vuex";
 import BookInfo from "@/components/Books/BookInfo.vue";
 import FeaturedBookInfo from "@/components/Books/FeaturedBookInfo.vue";
+import LogOutButton from "@/components/LogOutButton.vue";
 
 const store = useStore();
+const router = useRouter();
 const numFeatured = 4;
 
 const books = ref([]);
@@ -52,4 +58,8 @@ const featuredBooks = computed(() => {
 const searchedBooks = computed(() => {
   return books.value.filter(book => book.title.toLowerCase().includes(search.value.toLowerCase()));
 })
+
+const routeToLogin = () => {
+  router.push("/");
+}
 </script>
