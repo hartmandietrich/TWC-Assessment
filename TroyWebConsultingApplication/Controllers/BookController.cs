@@ -11,7 +11,6 @@ namespace TroyWebConsultingApplication.Controllers;
 [Route("api/[controller]")]
 public class BookController(
     IBookRepository repository,
-    SignInManager<IdentityUser> signInManager,
     UserManager<IdentityUser> userManager
     ) : ControllerBase
 {
@@ -43,11 +42,11 @@ public class BookController(
         return repository.UpdateBook(book);
     }
 
-    [HttpDelete("delete", Name = "DeleteBook")]
+    [HttpDelete("delete/{id}", Name = "DeleteBook")]
     [Authorize(Roles = "Librarian")]
-    public Book DeleteBook(Book book)
+    public Book DeleteBook(int id)
     {
-        return repository.DeleteBook(book);
+        return repository.DeleteBook(id);
     }
     
     [HttpPost("checkout", Name = "CheckoutBook")]

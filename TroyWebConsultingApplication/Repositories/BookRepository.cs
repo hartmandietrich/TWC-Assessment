@@ -12,7 +12,7 @@ public interface IBookRepository
     public IEnumerable<Book> GetBooksByTitle(string title);
     public Book AddBook(Book book);
     public Book UpdateBook(Book book);
-    public Book DeleteBook(Book book);
+    public Book DeleteBook(int id);
 }
 
 public class BookRepository(LibraryDbContext context) : IBookRepository
@@ -51,8 +51,13 @@ public class BookRepository(LibraryDbContext context) : IBookRepository
         return updatedBook;
     }
 
-    public Book DeleteBook(Book book)
+    public Book DeleteBook(int id)
     {
+        var book = context.Set<Book>().Find(id);
+        if (book == null)
+        {
+            throw new KeyNotFoundException();
+        }
         var deletedBook = context.Set<Book>().Remove(book).Entity;
         context.SaveChanges();
         return deletedBook;
