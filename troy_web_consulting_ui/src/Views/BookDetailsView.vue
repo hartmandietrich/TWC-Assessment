@@ -10,11 +10,17 @@
       <div>Page Count: {{detailBook?.pageCount}}</div>
     </div>
     <v-card-actions>
-      <v-btn class="text-white"
+      <v-btn v-if="!isUnavailable"
+             class="text-white"
              color="primary"
              variant="flat"
-             :disabled="isUnavailable"
              @click="checkoutBook">Checkout
+      </v-btn>
+      <v-btn v-else
+             class="text-white"
+             color="primary"
+             variant="flat"
+             @click="makeBookAvailable">Mark as Returned
       </v-btn>
       <v-btn class="text-white"
              color="primary"
@@ -69,6 +75,10 @@ const isUnavailable = computed(() => {
 
 const checkoutBook = () => {
   store.dispatch('books/checkoutBook', detailBook.value);
+}
+
+const makeBookAvailable = () => {
+  store.dispatch('books/makeBookAvailable', detailBook.value);
 }
 
 const deleteBook = () => {

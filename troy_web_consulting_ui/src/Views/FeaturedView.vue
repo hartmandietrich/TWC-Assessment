@@ -2,7 +2,7 @@
 <v-container class="d-flex flex-column justify-end">
   <v-row>
     <v-col cols="10">
-      Featured Books
+      <div class="text-h5"> Featured Books </div>
     </v-col>
     <v-col cols="2">
       <LogOutButton @click="routeToLogin"/>
