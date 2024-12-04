@@ -11,7 +11,7 @@
       <FeaturedBookInfo :book="book" />
     </v-col>
     <v-col cols="12">
-      All Books
+      <div class="text-h6">All Books</div>
       <v-text-field v-model="search" label="Search" variant="outlined"></v-text-field>
     </v-col>
     <v-col cols="12" v-for="(book, id) in searchedBooks">

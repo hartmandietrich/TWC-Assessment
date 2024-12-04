@@ -1,7 +1,7 @@
 <template>
-  <v-card @click="routeToDetails">
+  <v-card @click="routeToDetails" color="secondary" class="pa-3">
     <div class="d-flex flex-column">
-      <div>
+      <div class="text-subtitle-1 font-weight-medium">
         {{ book.title }}
       </div>
       <div>

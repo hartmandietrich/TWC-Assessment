@@ -1,5 +1,5 @@
 <template>
-  <v-card @click="routeToDetails">{{props.book.title}}</v-card>
+  <v-card class="pa-2" @click="routeToDetails">{{props.book.title}}</v-card>
 </template>
 
 <script setup>
