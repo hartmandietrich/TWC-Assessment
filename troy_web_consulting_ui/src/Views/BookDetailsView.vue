@@ -82,6 +82,6 @@ const makeBookAvailable = () => {
 }
 
 const deleteBook = () => {
-  store.dispatch('books/deleteBook', detailBook.value);
+  store.dispatch('books/deleteBook', detailBook.value.id);
 }
 </script>

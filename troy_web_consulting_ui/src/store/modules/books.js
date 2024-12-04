@@ -25,13 +25,8 @@ const actions = {
         return axios.post('https://localhost:44346/api/Book/create', book, {withCredentials: true})
     },
 
-    async deleteBook({}, book) {
-        return axios.delete('https://localhost:44346/api/Book/delete', {
-            headers: {
-                withCredentials: true
-            },
-            data: book
-        })
+    async deleteBook({}, bookId) {
+        return axios.delete(`https://localhost:44346/api/Book/delete/${bookId}`, {withCredentials: true})
     },
 
     async checkoutBook({}, book) {
