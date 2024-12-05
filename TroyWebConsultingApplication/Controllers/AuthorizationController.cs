@@ -9,7 +9,7 @@ using IdentityUser = Microsoft.AspNetCore.Identity.IdentityUser;
 namespace TroyWebConsultingApplication.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthorizationController(
     UserManager<IdentityUser> userManager,
     RoleManager<IdentityRole> roleManager,

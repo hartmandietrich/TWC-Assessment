@@ -1,4 +1,5 @@
 import axios from "axios";
+import {baseUrl} from "@/store/baseApiUrl.js";
 
 const state = () => ({
     books: [],
@@ -11,30 +12,30 @@ const getters = {
 
 const actions = {
     async getBooks({state}) {
-        return axios.get('https://localhost:44346/api/Book/getall', {withCredentials: true})
+        return axios.get(`${baseUrl}/Book/getall`, {withCredentials: true})
             .then((response) => {
                 state.books = response.data;
             })
     },
 
     async editBook({},book) {
-        return axios.put('https://localhost:44346/api/Book/update', book, {withCredentials: true})
+        return axios.put(`${baseUrl}/Book/update`, book, {withCredentials: true})
     },
 
     async createBook({},book) {
-        return axios.post('https://localhost:44346/api/Book/create', book, {withCredentials: true})
+        return axios.post(`${baseUrl}/Book/create`, book, {withCredentials: true})
     },
 
     async deleteBook({}, bookId) {
-        return axios.delete(`https://localhost:44346/api/Book/delete/${bookId}`, {withCredentials: true})
+        return axios.delete(`${baseUrl}/Book/delete/${bookId}`, {withCredentials: true})
     },
 
     async checkoutBook({}, book) {
-        return axios.post('https://localhost:44346/api/Book/checkout', book, {withCredentials: true})
+        return axios.post(`${baseUrl}/Book/checkout`, book, {withCredentials: true})
     },
 
     async makeBookAvailable({}, book) {
-        return axios.post('https://localhost:44346/api/Book/makeavailable', book, {withCredentials: true})
+        return axios.post(`${baseUrl}/Book/makeavailable`, book, {withCredentials: true})
     }
 }
 
